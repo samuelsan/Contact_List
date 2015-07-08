@@ -21,12 +21,7 @@ attr_reader :id
 
   #connection here
   def self.connection #refer to hero
-    @conn = PG.connect( 
-      dbname: 'contactlist',
-      user: 'development',
-      host: 'localhost',
-      password: 'development'
-      )
+    ContactDatabase.connect
   end
  
   def save
@@ -35,7 +30,7 @@ attr_reader :id
       sql = "UPDATE contacts SET firstname = $1, lastname = $2, email = $3 WHERE id = $4"
       self.class.connection.exec_params(sql, [@firstname, @lastname, @email, @id])
     else 
-      @id = @@conn.exec_params("INSERT INTO contacts (firstname, lastname, email)
+      @id = Contact.connection.exec_params("INSERT INTO contacts (firstname, lastname, email)
       VALUES ($1, $2, $3) RETURNING id", [@firstname, @lastname, @email])
     # sql = "UPDATE students SET name=$1, email=$2, enrolled=$3, WHERE id = $4"
     # self.class.connection.exec_params(sql, [@name, @email, @enrolled, @id])
