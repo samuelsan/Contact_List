@@ -102,9 +102,9 @@ def find_email
   puts "Here's what I could find:"
   puts "\n"
   results.each do |row|
-  puts "First name: #{row["firstname"]}"
-  puts "Last name: #{row["lastname"]}"
-  puts "Email: #{row["email"]}"
+  puts "First name: $1"
+  puts "Last name: $2"
+  puts "Email: $3"
   puts "\n"
   end
 end
